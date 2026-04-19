@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TemplateHub — Free & Premium Design Templates</title>
+    <meta name="description" content="Discover thousands of free, high-quality design templates for presentations, documents, code, and more. Built by creators, for creators.">
+    <link rel="stylesheet" href="/css/style.css">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="main-nav">
+  <div class="nav-inner">
+    <a href="/" class="nav-logo">
+      <div class="nav-logo-icon"><i class="ph-bold ph-squares-four"></i></div>
+      TemplateHub
+    </a>
+    <div class="nav-search">
+      <i class="ph ph-magnifying-glass nav-search-icon"></i>
+      <input type="text" id="navSearchInput" placeholder="Search templates..." autocomplete="off">
+    </div>
+    <div class="nav-links" id="navLinks">
+      <a href="/" class="nav-link active"><i class="ph ph-house"></i> Home</a>
+      <a href="/explore.html" class="nav-link"><i class="ph ph-compass"></i> Explore</a>
+      <a href="/upload.html" class="nav-link"><i class="ph ph-upload-simple"></i> Upload</a>
+      <a href="/about.html" class="nav-link"><i class="ph ph-info"></i> About</a>
+      <a href="/feedback.html" class="nav-link"><i class="ph ph-chat-centered-text"></i> Feedback</a>
+      <a href="/admin.html" class="nav-link" id="profileNavLink"><i class="ph ph-user-circle"></i> Profile</a>
+    </div>
+    <div class="nav-actions">
+      <a href="/login.html" class="btn-nav-ghost" id="loginNavBtn">Sign In</a>
+      <a href="/register.html" class="btn-nav-primary" id="signupNavBtn">Sign Up Free</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero-section page-body">
+  <div class="hero-badge"><i class="ph-bold ph-sparkle"></i> 1,000+ Templates & Growing</div>
+  <h1 class="hero-title">Find <span>Perfect</span> Templates<br>for Any Project</h1>
+  <p class="hero-subtitle">Kick-start your work with curated, free design templates for presentations, documents, code starters, and more.</p>
+
+  <div class="hero-search">
+    <i class="ph ph-magnifying-glass hero-search-icon"></i>
+    <input type="text" id="heroSearchInput" placeholder="Search across thousands of templates...">
+    <button class="hero-search-btn" onclick="doSearch()">Search</button>
+  </div>
+
+  <div class="hero-actions">
+    <a href="/explore.html" class="btn-primary btn-bouncy"><i class="ph-bold ph-compass"></i> Browse All Templates</a>
+    <a href="/upload.html" class="btn-outline btn-bouncy"><i class="ph-bold ph-upload-simple"></i> Share Yours</a>
+  </div>
+</section>
+
+<!-- CATEGORY SCROLL BAR -->
+<div class="category-bar">
+  <div class="category-bar-inner">
+    <button class="cat-btn active" data-cat="All"><i class="ph-bold ph-squares-four"></i> All</button>
+    <button class="cat-btn" data-cat="Presentations"><i class="ph-bold ph-presentation-chart"></i> Presentations</button>
+    <button class="cat-btn" data-cat="Documents"><i class="ph-bold ph-file-text"></i> Documents</button>
+    <button class="cat-btn" data-cat="Spreadsheets"><i class="ph-bold ph-table"></i> Spreadsheets</button>
+    <button class="cat-btn" data-cat="Code"><i class="ph-bold ph-code"></i> Code</button>
+    <button class="cat-btn" data-cat="Design"><i class="ph-bold ph-palette"></i> Design</button>
+    <button class="cat-btn" data-cat="Marketing"><i class="ph-bold ph-megaphone"></i> Marketing</button>
+    <button class="cat-btn" data-cat="Education"><i class="ph-bold ph-graduation-cap"></i> Education</button>
+  </div>
+</div>
+
+<!-- FEATURES -->
+<div class="section">
+  <div class="section-header">
+    <div>
+      <div class="section-title">Why TemplateHub?</div>
+      <div class="section-subtitle">Everything you need to create faster</div>
+    </div>
+  </div>
+  <div class="features-grid">
+    <div class="feature-card">
+      <div class="feature-icon" style="background: var(--brand-purple);"><i class="ph-bold ph-lightning"></i></div>
+      <h3 style="font-size:1.1rem; font-weight:800; margin-bottom:8px;">Launch Faster</h3>
+      <p style="font-size:0.875rem; color: var(--brand-gray-500); font-weight:500; line-height:1.6;">Stop starting from scratch. Download a polished template and ship your project this weekend.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon" style="background: var(--brand-pink);"><i class="ph-bold ph-star"></i></div>
+      <h3 style="font-size:1.1rem; font-weight:800; margin-bottom:8px;">Community Rated</h3>
+      <p style="font-size:0.875rem; color: var(--brand-gray-500); font-weight:500; line-height:1.6;">Every template is community-rated. Filter by top rated to find the very best immediately.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon" style="background: var(--brand-mint);"><i class="ph-bold ph-users"></i></div>
+      <h3 style="font-size:1.1rem; font-weight:800; margin-bottom:8px;">Share & Earn Credit</h3>
+      <p style="font-size:0.875rem; color: var(--brand-gray-500); font-weight:500; line-height:1.6;">Upload your work and share it with the creator community. Build your reputation.</p>
+    </div>
+  </div>
+</div>
+
+<!-- TEMPLATES SECTION -->
+<div class="section" style="padding-top: 0;">
+  <div class="section-header">
+    <div>
+      <div class="section-title" id="gridTitle">Recent Templates</div>
+      <div class="section-subtitle">Freshly uploaded by our community</div>
+    </div>
+    <a href="/explore.html" class="section-link">View all <i class="ph-bold ph-arrow-right"></i></a>
+  </div>
+  <div class="gallery-grid" id="homeGrid">
+    <div class="skeleton" style="aspect-ratio:4/3; border-radius:16px;"></div>
+    <div class="skeleton" style="aspect-ratio:4/3; border-radius:16px;"></div>
+    <div class="skeleton" style="aspect-ratio:4/3; border-radius:16px;"></div>
+    <div class="skeleton" style="aspect-ratio:4/3; border-radius:16px;"></div>
+  </div>
+</div>
+
+<script src="/js/main.js"></script>
+<script type="module" src="/js/home.js"></script>
+<script src="/js/footer-loader.js"></script>
+<script>
+  // Category filter on home
+  document.querySelectorAll('.cat-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const cat = btn.getAttribute('data-cat');
+      document.getElementById('gridTitle').innerText = cat === 'All' ? 'Recent Templates' : cat + ' Templates';
+      if (window.loadHomeTemplates) window.loadHomeTemplates(cat === 'All' ? null : cat);
+    });
+  });
+
+  function doSearch() {
+    const q = document.getElementById('heroSearchInput').value.trim();
+    if (q) window.location.href = `/explore.html?search=${encodeURIComponent(q)}`;
+  }
+
+  document.getElementById('heroSearchInput').addEventListener('keydown', e => {
+    if (e.key === 'Enter') doSearch();
+  });
+
+  document.getElementById('navSearchInput').addEventListener('keydown', e => {
+    if (e.key === 'Enter') {
+      const q = e.target.value.trim();
+      if (q) window.location.href = `/explore.html?search=${encodeURIComponent(q)}`;
+    }
+  });
+</script>
+</body>
+</html>
+

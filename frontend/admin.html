@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Dashboard | TemplateHub</title>
+    <meta name="description" content="Manage your uploaded templates, view stats, and edit your profile.">
+    <link rel="stylesheet" href="/css/style.css">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <style>
+        .dash-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; margin-bottom: 32px; }
+        @media(max-width:768px) { .dash-grid { grid-template-columns: 1fr; } }
+
+        .my-template-row {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 14px 16px;
+            border: 1px solid rgba(0,0,0,0.06);
+            border-radius: var(--radius-md);
+            background: white;
+            transition: 0.2s;
+            margin-bottom: 10px;
+        }
+        .my-template-row:hover { box-shadow: var(--shadow-md); border-color: rgba(0,0,0,0.1); }
+
+        .tmpl-thumb {
+            width: 56px;
+            height: 42px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+            flex-shrink: 0;
+            overflow: hidden;
+        }
+
+        .tmpl-thumb img { width: 100%; height: 100%; object-fit: cover; }
+
+        .tmpl-info { flex: 1; min-width: 0; }
+        .tmpl-title { font-size: 0.9rem; font-weight: 700; color: var(--brand-dark); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .tmpl-meta { font-size: 0.78rem; font-weight: 600; color: var(--brand-gray-500); margin-top: 3px; }
+
+        .tmpl-stat { font-size: 0.8rem; font-weight: 700; color: var(--brand-gray-500); display: flex; align-items: center; gap: 4px; flex-shrink: 0; }
+
+        .delete-btn {
+            width: 32px; height: 32px;
+            border: 1.5px solid rgba(236,72,153,0.3);
+            border-radius: var(--radius-sm);
+            background: transparent;
+            color: var(--brand-pink);
+            cursor: pointer;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 0.95rem;
+            transition: 0.15s;
+            flex-shrink: 0;
+        }
+        .delete-btn:hover { background: var(--brand-pink); color: white; border-color: var(--brand-pink); }
+
+        .section-card {
+            background: white;
+            border: 1px solid rgba(0,0,0,0.07);
+            border-radius: var(--radius-xl);
+            padding: 28px;
+        }
+
+        .section-card-title {
+            font-size: 1rem;
+            font-weight: 800;
+            color: var(--brand-dark);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+    </style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="main-nav">
+  <div class="nav-inner">
+    <a href="/" class="nav-logo">
+      <div class="nav-logo-icon"><i class="ph-bold ph-squares-four"></i></div>
+      TemplateHub
+    </a>
+    <div class="nav-links" id="navLinks">
+      <a href="/" class="nav-link"><i class="ph ph-house"></i> Home</a>
+      <a href="/explore.html" class="nav-link"><i class="ph ph-compass"></i> Explore</a>
+      <a href="/upload.html" class="nav-link"><i class="ph ph-upload-simple"></i> Upload</a>
+      <a href="/admin.html" class="nav-link active" id="profileNavLink"><i class="ph ph-user-circle"></i> Profile</a>
+    </div>
+    <div class="nav-actions">
+      <a href="/login.html" class="btn-nav-ghost" id="loginNavBtn">Sign In</a>
+      <a href="/register.html" class="btn-nav-primary" id="signupNavBtn">Sign Up Free</a>
+    </div>
+  </div>
+</nav>
+
+<div class="page-body">
+  <!-- Redirect if not logged in — handled by JS -->
+  <div id="authGate" style="display:none; text-align:center; padding:100px 24px;">
+      <i class="ph ph-lock" style="font-size:3.5rem; color:var(--brand-gray-300); display:block; margin-bottom:16px;"></i>
+      <h2 style="font-size:1.5rem; font-weight:800; margin-bottom:10px;">Sign in to view your dashboard</h2>
+      <p style="color:var(--brand-gray-500); margin-bottom:28px;">You need to be logged in to access your profile and templates.</p>
+      <a href="/login.html" class="btn-primary">Sign In</a>
+  </div>
+
+  <div id="dashboardContent" style="display:none;">
+    <!-- Profile Header -->
+    <div style="background: linear-gradient(135deg, #F5F3FF, #FDF2F8); border-bottom: 1px solid rgba(0,0,0,0.06); padding: 48px 24px 40px;">
+      <div style="max-width:1100px; margin:0 auto; display:flex; align-items:center; gap:24px; flex-wrap:wrap;">
+        <div class="avatar" id="userAvatar" style="width:80px;height:80px;font-size:1.75rem; flex-shrink:0;"></div>
+        <div style="flex:1; min-width:0;">
+          <h1 id="userName" style="font-size:1.75rem; font-weight:900; letter-spacing:-0.5px; margin-bottom:4px;"></h1>
+          <p id="userEmail" style="color:var(--brand-gray-500); font-size:0.9rem; font-weight:500;"></p>
+        </div>
+        <div style="display:flex; gap:10px; flex-wrap:wrap;">
+          <a href="/upload.html" class="btn-primary btn-bouncy" style="font-size:0.85rem; padding:10px 20px;">
+            <i class="ph-bold ph-upload-simple"></i> Upload Template
+          </a>
+          <button onclick="window.logout()" class="btn-outline btn-bouncy" style="font-size:0.85rem; padding:10px 20px; color:var(--brand-pink); border-color:rgba(236,72,153,0.3);">
+            <i class="ph-bold ph-sign-out"></i> Sign Out
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Dashboard Body -->
+    <div style="max-width:1100px; margin: 0 auto; padding: 40px 24px;">
+
+      <!-- Stats -->
+      <div class="dash-grid" id="statsGrid">
+        <div class="stat-card">
+          <div style="display:flex; align-items:center; gap:10px; margin-bottom:12px;">
+            <div style="width:36px;height:36px;background:rgba(139,92,246,0.1);border-radius:8px;display:flex;align-items:center;justify-content:center;color:var(--brand-purple);font-size:1rem;"><i class="ph-bold ph-file-text"></i></div>
+            <span style="font-size:0.8rem;font-weight:700;color:var(--brand-gray-500);text-transform:uppercase;letter-spacing:0.05em;">Templates</span>
+          </div>
+          <div class="stat-val" id="statTemplates">—</div>
+          <div class="stat-label">Shared Templates</div>
+        </div>
+        <div class="stat-card">
+          <div style="display:flex; align-items:center; gap:10px; margin-bottom:12px;">
+            <div style="width:36px;height:36px;background:rgba(16,185,129,0.1);border-radius:8px;display:flex;align-items:center;justify-content:center;color:var(--brand-mint);font-size:1rem;"><i class="ph-bold ph-cloud-arrow-down"></i></div>
+            <span style="font-size:0.8rem;font-weight:700;color:var(--brand-gray-500);text-transform:uppercase;letter-spacing:0.05em;">Downloads</span>
+          </div>
+          <div class="stat-val" id="statDownloads">—</div>
+          <div class="stat-label">Total Downloads</div>
+        </div>
+        <div class="stat-card">
+          <div style="display:flex; align-items:center; gap:10px; margin-bottom:12px;">
+            <div style="width:36px;height:36px;background:rgba(245,158,11,0.1);border-radius:8px;display:flex;align-items:center;justify-content:center;color:var(--brand-yellow);font-size:1rem;"><i class="ph-bold ph-star"></i></div>
+            <span style="font-size:0.8rem;font-weight:700;color:var(--brand-gray-500);text-transform:uppercase;letter-spacing:0.05em;">Rating</span>
+          </div>
+          <div class="stat-val" id="statRating">—</div>
+          <div class="stat-label">Average Rating</div>
+        </div>
+      </div>
+
+      <!-- My Templates -->
+      <div class="section-card">
+        <div class="section-card-title">
+          <span>My Templates</span>
+          <a href="/upload.html" style="font-size:0.8rem; font-weight:700; color:var(--brand-purple); display:flex; align-items:center; gap:4px;"><i class="ph-bold ph-plus"></i> Add New</a>
+        </div>
+        <div id="myTemplatesContainer">
+          <div style="display:flex;gap:12px;flex-direction:column;">
+            <div class="skeleton" style="height:66px; border-radius:12px;"></div>
+            <div class="skeleton" style="height:66px; border-radius:12px;"></div>
+            <div class="skeleton" style="height:66px; border-radius:12px;"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="/js/main.js"></script>
+<script type="module" src="/js/admin.js"></script>
+<script src="/js/footer-loader.js"></script>
+</body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Account | TemplateHub</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+</head>
+<body>
+<div class="auth-wrapper">
+  <div style="width:100%; max-width:440px;">
+    <a href="/" style="display:flex; align-items:center; gap:10px; justify-content:center; margin-bottom:32px; text-decoration:none;">
+      <div class="nav-logo-icon"><i class="ph-bold ph-squares-four"></i></div>
+      <span style="font-size:1.2rem; font-weight:800; color:var(--brand-dark); font-family:'Plus Jakarta Sans',sans-serif;">TemplateHub</span>
+    </a>
+
+    <div class="auth-card">
+      <h1>Create your account</h1>
+      <p class="auth-sub">Join thousands of creators sharing templates</p>
+
+      <button class="social-btn btn-bouncy" onclick="alert('Connect your Google credentials to enable Google Sign-In')">
+        <img src="https://www.svgrepo.com/show/475656/google-color.svg" width="18" alt="Google">
+        Continue with Google
+      </button>
+      <button class="social-btn btn-bouncy" onclick="alert('Connect your Apple credentials to enable Apple Sign-In')" style="margin-bottom:0">
+        <i class="ph-fill ph-apple-logo" style="font-size:1.1rem;"></i>
+        Continue with Apple
+      </button>
+
+      <div class="auth-divider">or</div>
+
+      <form id="registerForm">
+        <div class="input-group">
+          <label>Full Name</label>
+          <input type="text" class="auth-input" name="name" placeholder="John Doe" required>
+        </div>
+        <div class="input-group">
+          <label>Email Address</label>
+          <input type="email" class="auth-input" name="email" placeholder="hello@example.com" required>
+        </div>
+        <div class="input-group">
+          <label>Password</label>
+          <input type="password" class="auth-input" name="password" placeholder="Min. 6 characters" required minlength="6">
+        </div>
+        <button type="submit" class="auth-btn btn-bouncy" id="registerBtn">Create Free Account</button>
+      </form>
+
+      <div class="auth-footer">
+        Already have an account? <a href="/login.html">Sign in</a>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="/js/main.js"></script>
+<script type="module" src="/js/auth.js"></script>
+</body>
+</html>

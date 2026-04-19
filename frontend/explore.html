@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Explore Templates | TemplateHub</title>
+    <meta name="description" content="Browse and download thousands of free templates across all categories.">
+    <link rel="stylesheet" href="/css/style.css">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="main-nav">
+  <div class="nav-inner">
+    <a href="/" class="nav-logo">
+      <div class="nav-logo-icon"><i class="ph-bold ph-squares-four"></i></div>
+      TemplateHub
+    </a>
+    <div class="nav-search">
+      <i class="ph ph-magnifying-glass nav-search-icon"></i>
+      <input type="text" id="navSearchInput" placeholder="Search templates..." autocomplete="off">
+    </div>
+    <div class="nav-links" id="navLinks">
+      <a href="/" class="nav-link"><i class="ph ph-house"></i> Home</a>
+      <a href="/explore.html" class="nav-link active"><i class="ph ph-compass"></i> Explore</a>
+      <a href="/upload.html" class="nav-link"><i class="ph ph-upload-simple"></i> Upload</a>
+      <a href="/about.html" class="nav-link"><i class="ph ph-info"></i> About</a>
+      <a href="/feedback.html" class="nav-link"><i class="ph ph-chat-centered-text"></i> Feedback</a>
+      <a href="/admin.html" class="nav-link" id="profileNavLink"><i class="ph ph-user-circle"></i> Profile</a>
+    </div>
+    <div class="nav-actions">
+      <a href="/login.html" class="btn-nav-ghost" id="loginNavBtn">Sign In</a>
+      <a href="/register.html" class="btn-nav-primary" id="signupNavBtn">Sign Up Free</a>
+    </div>
+  </div>
+</nav>
+
+<!-- CATEGORY BAR (sticky below nav) -->
+<div class="category-bar" style="top: 64px;">
+  <div class="category-bar-inner">
+    <button class="cat-btn active" data-cat="All"><i class="ph-bold ph-squares-four"></i> All</button>
+    <button class="cat-btn" data-cat="Presentations"><i class="ph-bold ph-presentation-chart"></i> Presentations</button>
+    <button class="cat-btn" data-cat="Documents"><i class="ph-bold ph-file-text"></i> Documents</button>
+    <button class="cat-btn" data-cat="Spreadsheets"><i class="ph-bold ph-table"></i> Spreadsheets</button>
+    <button class="cat-btn" data-cat="Code"><i class="ph-bold ph-code"></i> Code</button>
+    <button class="cat-btn" data-cat="Design"><i class="ph-bold ph-palette"></i> Design</button>
+    <button class="cat-btn" data-cat="Marketing"><i class="ph-bold ph-megaphone"></i> Marketing</button>
+    <button class="cat-btn" data-cat="Education"><i class="ph-bold ph-graduation-cap"></i> Education</button>
+  </div>
+</div>
+
+<!-- EXPLORE BODY -->
+<div class="page-body" style="padding-top: calc(64px + 50px);">
+  <div class="section">
+    <div class="section-header" style="margin-bottom: 8px;">
+      <div>
+        <div class="section-title" id="exploreTitle">All Templates</div>
+        <div class="section-subtitle" id="exploreCount">Loading...</div>
+      </div>
+      <div style="display:flex;gap:8px;align-items:center;">
+        <select id="sortSelect" style="padding:7px 12px; border:1.5px solid var(--brand-gray-300); border-radius:8px; font-size:0.8rem; font-weight:600; font-family:Inter,sans-serif; outline:none; cursor:pointer; background:white; color:var(--brand-gray-700);">
+          <option value="newest">Newest First</option>
+          <option value="popular">Most Popular</option>
+          <option value="rating">Top Rated</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="gallery-grid" id="templatesContainer" style="margin-top: 28px;">
+      <div class="skeleton" style="aspect-ratio:4/3; border-radius:16px;"></div>
+      <div class="skeleton" style="aspect-ratio:4/3; border-radius:16px;"></div>
+      <div class="skeleton" style="aspect-ratio:4/3; border-radius:16px;"></div>
+      <div class="skeleton" style="aspect-ratio:4/3; border-radius:16px;"></div>
+    </div>
+  </div>
+</div>
+
+<script src="/js/main.js"></script>
+<script type="module" src="/js/explore.js"></script>
+<script src="/js/footer-loader.js"></script>
+<script>
+  document.getElementById('navSearchInput').addEventListener('keydown', e => {
+    if (e.key === 'Enter') {
+      const q = e.target.value.trim();
+      if (q) {
+        const url = new URL(window.location.href);
+        url.searchParams.set('search', q);
+        window.location.href = url.toString();
+      }
+    }
+  });
+</script>
+</body>
+</html>

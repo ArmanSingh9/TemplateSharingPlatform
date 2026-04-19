@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Template | TemplateHub</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="main-nav">
+  <div class="nav-inner">
+    <a href="/" class="nav-logo">
+      <div class="nav-logo-icon"><i class="ph-bold ph-squares-four"></i></div>
+      TemplateHub
+    </a>
+    <div class="nav-links" id="navLinks">
+      <a href="/" class="nav-link"><i class="ph ph-house"></i> Home</a>
+      <a href="/explore.html" class="nav-link"><i class="ph ph-compass"></i> Explore</a>
+      <a href="/upload.html" class="nav-link active"><i class="ph ph-upload-simple"></i> Upload</a>
+      <a href="/admin.html" class="nav-link" id="profileNavLink"><i class="ph ph-user-circle"></i> Profile</a>
+    </div>
+    <div class="nav-actions">
+      <a href="/login.html" class="btn-nav-ghost" id="loginNavBtn">Sign In</a>
+      <a href="/register.html" class="btn-nav-primary" id="signupNavBtn">Sign Up Free</a>
+    </div>
+  </div>
+</nav>
+
+<div class="page-body">
+  <div class="upload-page">
+    <div style="margin-bottom: 28px;">
+      <h1 style="font-size:2rem; font-weight:900; letter-spacing:-0.5px; color:var(--brand-dark); margin-bottom:6px;">Share a Template</h1>
+      <p style="color:var(--brand-gray-500); font-size:0.95rem; font-weight:500;">Help the community grow — upload your best work below.</p>
+    </div>
+
+    <div class="upload-card">
+      <form id="uploadForm">
+
+        <!-- Dual Upload Zones -->
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:24px;">
+          <!-- Template File -->
+          <div>
+            <label class="form-group" style="display:block; font-size:0.8rem; font-weight:700; color:var(--brand-gray-700); margin-bottom:8px; text-transform:uppercase; letter-spacing:0.02em;">Template File *</label>
+            <div class="drop-zone" id="dropZone">
+              <i class="ph-bold ph-file-zip"></i>
+              <h3>Drag & Drop File</h3>
+              <p>Any file type — PDF, ZIP, DOCX...</p>
+              <input type="file" id="templateFile" style="display:none;" required>
+            </div>
+            <div id="fileSelectedTxt" style="font-size:0.78rem; font-weight:700; color:var(--brand-mint); margin-top:6px; display:none;"></div>
+          </div>
+
+          <!-- Preview Image (optional) -->
+          <div>
+            <label style="display:block; font-size:0.8rem; font-weight:700; color:var(--brand-gray-700); margin-bottom:8px; text-transform:uppercase; letter-spacing:0.02em;">Preview Image <span style="font-weight:500; text-transform:none;">(optional)</span></label>
+            <div class="drop-zone" id="imageDropZone" style="border-color:var(--brand-pink); background:rgba(236,72,153,0.03);">
+              <i class="ph-bold ph-image" style="color:var(--brand-pink);"></i>
+              <h3>Drop Thumbnail</h3>
+              <p>PNG, JPG — shown on cards</p>
+              <input type="file" id="imageFile" accept="image/*" style="display:none;">
+            </div>
+            <div id="imgSelectedTxt" style="font-size:0.78rem; font-weight:700; color:var(--brand-pink); margin-top:6px; display:none;"></div>
+          </div>
+        </div>
+
+        <!-- Template Title -->
+        <div class="form-group">
+          <label>Template Title</label>
+          <input type="text" name="title" class="form-control" placeholder="e.g. Modern Startup Pitch Deck" required>
+        </div>
+
+        <!-- Category -->
+        <div class="form-group">
+          <label>Category</label>
+          <select name="category" class="form-control" required>
+            <option value="Presentations">Presentations</option>
+            <option value="Documents">Documents</option>
+            <option value="Spreadsheets">Spreadsheets</option>
+            <option value="Code">Code</option>
+            <option value="Design">Design</option>
+            <option value="Marketing">Marketing</option>
+            <option value="Education">Education</option>
+          </select>
+        </div>
+
+        <!-- Description -->
+        <div class="form-group">
+          <label>Description</label>
+          <textarea name="description" class="form-control" rows="4" placeholder="Describe what makes this template great..." required></textarea>
+        </div>
+
+        <button type="submit" class="submit-btn btn-bouncy" id="submitBtn">
+          <i class="ph-bold ph-upload-simple"></i> Publish Template
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script src="/js/main.js"></script>
+<script type="module" src="/js/upload.js"></script>
+<script src="/js/footer-loader.js"></script>
+</body>
+</html>
+

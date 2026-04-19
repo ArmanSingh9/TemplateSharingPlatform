@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us | TemplateHub</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <style>
+        .about-hero {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 60px auto;
+        }
+
+        .about-hero h1 {
+            font-size: 5rem;
+            font-weight: 800;
+            line-height: 0.9;
+            letter-spacing: -3px;
+            margin-bottom: 20px;
+            color: var(--brand-dark);
+        }
+
+        .about-hero p {
+            font-size: 1.4rem;
+            color: rgba(15, 23, 42, 0.6);
+            font-weight: 600;
+            line-height: 1.6;
+        }
+
+        .mission-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-bottom: 80px;
+        }
+
+        .mission-card {
+            background: white;
+            padding: 40px;
+            border-radius: 40px;
+            text-align: center;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.05);
+            border: 1px solid rgba(0,0,0,0.03);
+            transition: 0.3s;
+        }
+
+        .mission-card:hover { transform: translateY(-10px); box-shadow: 0 20px 50px rgba(0,0,0,0.1); }
+
+        .mission-icon {
+            width: 80px; height: 80px;
+            margin: 0 auto 20px auto;
+            border-radius: 25px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 2.5rem; color: white;
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="floating-nav fade-up" style="animation-delay: 0.1s;">
+        <a href="/" class="nav-brand">
+            <i class="ph ph-squares-four text-white"></i>
+        </a>
+        <div class="nav-links">
+            <a href="/" class="nav-link">
+                <i class="ph ph-house"></i> Home
+            </a>
+            <a href="/explore.html" class="nav-link">
+                <i class="ph ph-magnifying-glass"></i> Explore
+            </a>
+            <a href="/upload.html" class="nav-link">
+                <i class="ph ph-cloud-arrow-up"></i> Upload
+            </a>
+            <a href="/about.html" class="nav-link active">
+                <i class="ph ph-info"></i> About
+            </a>
+        </div>
+    </nav>
+
+    <main class="container fade-up" style="animation-delay: 0.2s;">
+        <div class="about-hero">
+            <h1>We Help Creators <span>Build Faster</span>.</h1>
+            <p>At TemplateHub, we believe great design shouldn't be a bottleneck. Our mission is to provide developers, designers, and entrepreneurs with high-quality, free resources to jumpstart their next big idea.</p>
+        </div>
+
+        <div class="mission-grid">
+            <div class="mission-card">
+                <div class="mission-icon" style="background: var(--brand-purple);">
+                    <i class="ph-bold ph-lightning"></i>
+                </div>
+                <h3 style="font-size: 1.5rem; font-weight: 800; margin-bottom: 10px;">Speed</h3>
+                <p style="color: rgba(15, 23, 42, 0.5); font-weight: 600;">Stop starting from zero. Grab a template and launch your project this weekend.</p>
+            </div>
+            <div class="mission-card">
+                <div class="mission-icon" style="background: var(--brand-pink);">
+                    <i class="ph-bold ph-palette"></i>
+                </div>
+                <h3 style="font-size: 1.5rem; font-weight: 800; margin-bottom: 10px;">Quality</h3>
+                <p style="color: rgba(15, 23, 42, 0.5); font-weight: 600;">Every template is community-rated and reviewed to ensure premium aesthetics.</p>
+            </div>
+            <div class="mission-card">
+                <div class="mission-icon" style="background: var(--brand-mint);">
+                    <i class="ph-bold ph-users"></i>
+                </div>
+                <h3 style="font-size: 1.5rem; font-weight: 800; margin-bottom: 10px;">Community</h3>
+                <p style="color: rgba(15, 23, 42, 0.5); font-weight: 600;">Built by creators, for creators. Share your skills and help others succeed.</p>
+            </div>
+        </div>
+        
+        <div style="text-align: center; margin-bottom: 80px;">
+            <a href="/feedback.html" class="btn-bouncy" style="display:inline-block; background: var(--brand-dark); color: white; padding: 20px 40px; border-radius: 999px; text-decoration: none; font-weight: 800; font-size: 1.2rem; box-shadow: var(--shadow-premium);">Let us know what you think <i class="ph-bold ph-arrow-right"></i></a>
+        </div>
+    </main>
+
+    <script src="/js/main.js"></script>
+    <script src="/js/footer-loader.js"></script>
+</body>
+</html>

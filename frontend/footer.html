@@ -1,0 +1,158 @@
+<!-- ════════════════════════════════════════
+     GLOBAL SITE FOOTER
+     Include on every page with:
+     <script src="/js/footer.js"></script> + <div id="site-footer"></div>
+════════════════════════════════════════ -->
+
+<footer class="site-footer" id="site-footer-el">
+  
+  <!-- Stats Strip -->
+  <div class="footer-stats-strip">
+    <div class="footer-stats-inner">
+      <div>
+        <div class="footer-stat-num" id="stat-templates">1,000+</div>
+        <div class="footer-stat-label">Templates Available</div>
+      </div>
+      <div>
+        <div class="footer-stat-num">50K+</div>
+        <div class="footer-stat-label">Downloads This Month</div>
+      </div>
+      <div>
+        <div class="footer-stat-num">12K+</div>
+        <div class="footer-stat-label">Active Creators</div>
+      </div>
+      <div>
+        <div class="footer-stat-num">100%</div>
+        <div class="footer-stat-label">Free to Download</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Footer Content -->
+  <div class="footer-top">
+
+    <!-- Brand Column -->
+    <div class="footer-brand">
+      <div class="footer-logo">
+        <div class="footer-logo-icon"><i class="ph-bold ph-squares-four"></i></div>
+        <span class="footer-logo-text">TemplateHub</span>
+      </div>
+      <p class="footer-tagline">The community platform for sharing free, high-quality design templates. Built by creators, for creators.</p>
+
+      <!-- Newsletter -->
+      <div class="footer-newsletter-label">Get weekly picks in your inbox</div>
+      <div class="footer-newsletter-form">
+        <input type="email" id="footerEmailInput" placeholder="your@email.com">
+        <button onclick="subscribeNewsletter()">Subscribe</button>
+      </div>
+
+      <!-- Social Links -->
+      <div class="footer-socials">
+        <a href="#" class="social-icon-btn" title="Twitter / X" aria-label="Twitter">
+          <i class="ph-bold ph-x-logo"></i>
+        </a>
+        <a href="#" class="social-icon-btn" title="Instagram" aria-label="Instagram">
+          <i class="ph-bold ph-instagram-logo"></i>
+        </a>
+        <a href="#" class="social-icon-btn" title="GitHub" aria-label="GitHub">
+          <i class="ph-bold ph-github-logo"></i>
+        </a>
+        <a href="#" class="social-icon-btn" title="LinkedIn" aria-label="LinkedIn">
+          <i class="ph-bold ph-linkedin-logo"></i>
+        </a>
+        <a href="#" class="social-icon-btn" title="YouTube" aria-label="YouTube">
+          <i class="ph-bold ph-youtube-logo"></i>
+        </a>
+      </div>
+    </div>
+
+    <!-- Explore Column -->
+    <div>
+      <div class="footer-col-title">Explore</div>
+      <ul class="footer-links">
+        <li><a href="/explore.html"><i class="ph ph-caret-right"></i> All Templates</a></li>
+        <li><a href="/explore.html?category=Presentations"><i class="ph ph-caret-right"></i> Presentations</a></li>
+        <li><a href="/explore.html?category=Documents"><i class="ph ph-caret-right"></i> Documents</a></li>
+        <li><a href="/explore.html?category=Spreadsheets"><i class="ph ph-caret-right"></i> Spreadsheets</a></li>
+        <li><a href="/explore.html?category=Code"><i class="ph ph-caret-right"></i> Code Templates</a></li>
+        <li><a href="/explore.html?category=Design"><i class="ph ph-caret-right"></i> Design Assets</a></li>
+      </ul>
+    </div>
+
+    <!-- Company Column -->
+    <div>
+      <div class="footer-col-title">Company</div>
+      <ul class="footer-links">
+        <li><a href="/about.html"><i class="ph ph-caret-right"></i> About Us</a></li>
+        <li><a href="/feedback.html"><i class="ph ph-caret-right"></i> Feedback</a></li>
+        <li><a href="/upload.html"><i class="ph ph-caret-right"></i> Upload Template</a></li>
+        <li><a href="/register.html"><i class="ph ph-caret-right"></i> Join the Community</a></li>
+        <li><a href="/admin.html"><i class="ph ph-caret-right"></i> My Dashboard</a></li>
+      </ul>
+    </div>
+
+    <!-- Resources Column -->
+    <div>
+      <div class="footer-col-title">Resources</div>
+      <ul class="footer-links">
+        <li><a href="/feedback.html"><i class="ph ph-caret-right"></i> Report a Bug</a></li>
+        <li><a href="/feedback.html"><i class="ph ph-caret-right"></i> Request a Template</a></li>
+        <li><a href="/about.html"><i class="ph ph-caret-right"></i> Creator Guidelines</a></li>
+        <li><a href="/forgot-password.html"><i class="ph ph-caret-right"></i> Reset Password</a></li>
+      </ul>
+
+      <!-- App Badge style CTA -->
+      <div style="margin-top: 28px; padding: 16px; background: rgba(139,92,246,0.15); border: 1px solid rgba(139,92,246,0.25); border-radius: 12px;">
+        <div style="font-size:0.75rem; font-weight:700; color:rgba(255,255,255,0.5); text-transform:uppercase; letter-spacing:0.06em; margin-bottom:6px;">🚀 Share your work</div>
+        <p style="font-size:0.82rem; color:rgba(255,255,255,0.7); line-height:1.5; margin-bottom:12px;">Upload your templates and help thousands of creators.</p>
+        <a href="/upload.html" style="display:inline-flex; align-items:center; gap:6px; padding:7px 14px; background:var(--brand-purple); color:white; border-radius:7px; font-size:0.8rem; font-weight:700; text-decoration:none; transition:0.15s;">
+          <i class="ph-bold ph-upload-simple"></i> Start Uploading
+        </a>
+      </div>
+    </div>
+
+  </div>
+
+  <hr class="footer-divider">
+
+  <!-- Bottom Bar -->
+  <div class="footer-bottom">
+    <span class="footer-copyright">
+      © <span id="footerYear">2025</span> TemplateHub. Made with ❤️ for the creator community.
+    </span>
+    <div class="footer-legal-links">
+      <a href="/privacy.html">Privacy Policy</a>
+      <a href="/terms.html">Terms of Service</a>
+      <a href="/privacy.html#cookies">Cookie Policy</a>
+      <a href="/feedback.html">Contact</a>
+    </div>
+  </div>
+
+</footer>
+
+<script>
+  // Set current year dynamically
+  const footerYearEl = document.getElementById('footerYear');
+  if (footerYearEl) footerYearEl.textContent = new Date().getFullYear();
+
+  // Newsletter subscribe
+  function subscribeNewsletter() {
+    const input = document.getElementById('footerEmailInput');
+    if (!input) return;
+    const email = input.value.trim();
+    if (!email || !email.includes('@')) {
+      if (window.showToast) window.showToast('Please enter a valid email address', 'error');
+      return;
+    }
+    input.value = '';
+    if (window.showToast) window.showToast('🎉 You\'re subscribed! Weekly picks coming soon.', 'success');
+  }
+
+  // Allow pressing Enter in newsletter input
+  const footerInput = document.getElementById('footerEmailInput');
+  if (footerInput) {
+    footerInput.addEventListener('keydown', e => {
+      if (e.key === 'Enter') subscribeNewsletter();
+    });
+  }
+</script>

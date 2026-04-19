@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 — Page Not Found | TemplateHub</title>
+    <meta name="description" content="The page you are looking for doesn't exist.">
+    <link rel="stylesheet" href="/css/style.css">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <style>
+        .not-found-wrap {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            text-align: center;
+            padding: 40px 24px;
+            background: var(--brand-gray-50);
+        }
+        .nf-code {
+            font-size: clamp(6rem, 20vw, 12rem);
+            font-weight: 900;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            letter-spacing: -6px;
+            line-height: 1;
+            background: linear-gradient(135deg, var(--brand-purple), var(--brand-pink));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 8px;
+        }
+        .nf-title {
+            font-size: 1.75rem;
+            font-weight: 800;
+            color: var(--brand-dark);
+            margin-bottom: 12px;
+            letter-spacing: -0.5px;
+        }
+        .nf-sub {
+            font-size: 1rem;
+            color: var(--brand-gray-500);
+            font-weight: 500;
+            max-width: 400px;
+            line-height: 1.6;
+            margin-bottom: 36px;
+        }
+        .nf-actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+    </style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="main-nav">
+  <div class="nav-inner">
+    <a href="/" class="nav-logo">
+      <div class="nav-logo-icon"><i class="ph-bold ph-squares-four"></i></div>
+      TemplateHub
+    </a>
+    <div class="nav-links" id="navLinks">
+      <a href="/" class="nav-link"><i class="ph ph-house"></i> Home</a>
+      <a href="/explore.html" class="nav-link"><i class="ph ph-compass"></i> Explore</a>
+    </div>
+    <div class="nav-actions">
+      <a href="/login.html" class="btn-nav-ghost">Sign In</a>
+      <a href="/register.html" class="btn-nav-primary">Sign Up Free</a>
+    </div>
+  </div>
+</nav>
+
+<div class="not-found-wrap">
+    <div class="nf-code">404</div>
+    <h1 class="nf-title">Oops! Page not found</h1>
+    <p class="nf-sub">The page you're looking for doesn't exist or may have been moved. Let's get you back on track.</p>
+    <div class="nf-actions">
+        <a href="/" class="btn-primary btn-bouncy"><i class="ph-bold ph-house"></i> Back to Home</a>
+        <a href="/explore.html" class="btn-outline btn-bouncy"><i class="ph-bold ph-compass"></i> Browse Templates</a>
+    </div>
+
+    <!-- Quick suggestions -->
+    <div style="margin-top: 60px; display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; max-width: 500px;">
+        <span style="font-size:0.78rem; font-weight:700; color:var(--brand-gray-400); text-transform:uppercase; letter-spacing:0.06em; width:100%; margin-bottom:4px;">Quick Links</span>
+        <a href="/explore.html?category=Presentations" style="padding:7px 16px; background:white; border:1.5px solid var(--brand-gray-200); border-radius:999px; font-size:0.8rem; font-weight:600; color:var(--brand-gray-700); transition:0.15s;" onmouseover="this.style.borderColor='var(--brand-purple)'" onmouseout="this.style.borderColor='var(--brand-gray-200)'">Presentations</a>
+        <a href="/explore.html?category=Code" style="padding:7px 16px; background:white; border:1.5px solid var(--brand-gray-200); border-radius:999px; font-size:0.8rem; font-weight:600; color:var(--brand-gray-700); transition:0.15s;" onmouseover="this.style.borderColor='var(--brand-purple)'" onmouseout="this.style.borderColor='var(--brand-gray-200)'">Code</a>
+        <a href="/explore.html?category=Documents" style="padding:7px 16px; background:white; border:1.5px solid var(--brand-gray-200); border-radius:999px; font-size:0.8rem; font-weight:600; color:var(--brand-gray-700); transition:0.15s;" onmouseover="this.style.borderColor='var(--brand-purple)'" onmouseout="this.style.borderColor='var(--brand-gray-200)'">Documents</a>
+        <a href="/upload.html" style="padding:7px 16px; background:white; border:1.5px solid var(--brand-gray-200); border-radius:999px; font-size:0.8rem; font-weight:600; color:var(--brand-gray-700); transition:0.15s;" onmouseover="this.style.borderColor='var(--brand-purple)'" onmouseout="this.style.borderColor='var(--brand-gray-200)'">Upload a Template</a>
+        <a href="/feedback.html" style="padding:7px 16px; background:white; border:1.5px solid var(--brand-gray-200); border-radius:999px; font-size:0.8rem; font-weight:600; color:var(--brand-gray-700); transition:0.15s;" onmouseover="this.style.borderColor='var(--brand-purple)'" onmouseout="this.style.borderColor='var(--brand-gray-200)'">Report a Bug</a>
+    </div>
+</div>
+
+<script src="/js/main.js"></script>
+</body>
+</html>
