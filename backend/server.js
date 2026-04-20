@@ -13,26 +13,32 @@ connectDB();
 const app = express();
 
 // ─── CORS ───────────────────────────────────────────────────────────────────
-// Allow Netlify frontend + local development
+// Allow Netlify, Vercel, and local development
 const allowedOrigins = [
     'http://localhost:5000',
     'http://localhost:3000',
     'http://127.0.0.1:5000',
 ];
 
-// Add any FRONTEND_URL set in environment (your Netlify URL)
+// Add frontend URL from environment variable (set this in Render → FRONTEND_URL)
 if (process.env.FRONTEND_URL) {
     allowedOrigins.push(process.env.FRONTEND_URL);
 }
 
 app.use(cors({
     origin: function (origin, callback) {
-        // Allow requests with no origin (mobile apps, curl, Postman)
+        // Allow requests with no origin (Postman, curl, mobile apps)
         if (!origin) return callback(null, true);
-        // Allow any netlify.app subdomain
-        if (origin.endsWith('.netlify.app') || allowedOrigins.includes(origin)) {
-            return callback(null, true);
-        }
+
+        // Allow Netlify, Vercel, and custom domains
+        const isAllowed =
+            origin.endsWith('.netlify.app') ||
+            origin.endsWith('.vercel.app') ||
+            allowedOrigins.includes(origin);
+
+        if (isAllowed) return callback(null, true);
+
+        console.warn('CORS blocked:', origin);
         callback(new Error(`CORS: origin ${origin} not allowed`));
     },
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
