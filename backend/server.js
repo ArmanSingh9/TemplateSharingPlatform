@@ -42,7 +42,5 @@ app.use((err, req, res, next) => {
 const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => {
-    console.log(`\n🚀 Server running at http://localhost:${PORT}`);
-    console.log(`📁 Frontend at http://localhost:${PORT}/index.html`);
-    console.log(`🔌 API at http://localhost:${PORT}/api\n`);
+    console.log(`Server running on port ${PORT}`);
 });
