@@ -25,13 +25,16 @@ const userSchema = new mongoose.Schema({
 }, { timestamps: true });
 
 // Auto-hash password before saving (only if changed)
-userSchema.pre('save', async function(next) {
-    if (!this.isModified('password')) return next();
-    // Only hash if it's not already a bcrypt hash
-    if (this.password.startsWith('$2b$') || this.password.startsWith('$2a$')) return next();
+// NOTE: In Mongoose 6+, async pre-save hooks must NOT use next() — 
+// Mongoose resolves the hook via the returned Promise automatically.
+userSchema.pre('save', async function () {
+    // Skip if password field was not changed
+    if (!this.isModified('password')) return;
+    // Skip if already a valid bcrypt hash (starts with $2b$ or $2a$)
+    if (this.password.startsWith('$2b$') || this.password.startsWith('$2a$')) return;
+    // Hash the plain-text password
     const salt = await bcrypt.genSalt(10);
     this.password = await bcrypt.hash(this.password, salt);
-    next();
 });
 
 module.exports = mongoose.model('User', userSchema);
