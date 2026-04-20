@@ -9,22 +9,22 @@ const Template = require('./models/Template');
 
 const MONGO_URI = process.env.MONGO_URI || 'mongodb://127.0.0.1:27017/template-sharing';
 
-// Preview image mapping — these images now exist in /uploads/
+// Preview image mapping — images committed to frontend/images/previews/ and served by Netlify
 const PREVIEW_IMAGES = {
-    "Modern Pitch Deck": "/uploads/preview_pitch_deck.png",
-    "Minimalist Resume": "/uploads/preview_resume.png",
-    "Monthly Budget Tracker": "/uploads/preview_budget.png",
-    "Marketing Strategy Plan": "/uploads/preview_marketing.png",
-    "Web Developer Portfolio": "/uploads/preview_portfolio.png",
-    "React Dashboard Admin": "/uploads/preview_code_dash.png",
-    "Brand Guidelines": "/uploads/preview_brand.png",
-    "Invoice Template": "/uploads/preview_invoice.png",
-    "SaaS Landing Page": "/uploads/preview_saas.png",
-    "Creative Agency Deck": "/uploads/preview_marketing.png",
-    "E-Commerce Financial Model": "/uploads/preview_budget.png",
-    "Python Data Analysis Script": "/uploads/preview_code_dash.png",
-    "Company Newsletter": "/uploads/preview_saas.png",
-    "Social Media Calendar": "/uploads/preview_brand.png",
+    "Modern Pitch Deck":          "/images/previews/preview_pitch_deck.png",
+    "Minimalist Resume":          "/images/previews/preview_resume.png",
+    "Monthly Budget Tracker":     "/images/previews/preview_budget.png",
+    "Marketing Strategy Plan":    "/images/previews/preview_marketing.png",
+    "Web Developer Portfolio":    "/images/previews/preview_portfolio.png",
+    "React Dashboard Admin":      "/images/previews/preview_code_dash.png",
+    "Brand Guidelines":           "/images/previews/preview_brand.png",
+    "Invoice Template":           "/images/previews/preview_invoice.png",
+    "SaaS Landing Page":          "/images/previews/preview_saas.png",
+    "Creative Agency Deck":       "/images/previews/preview_marketing.png",
+    "E-Commerce Financial Model": "/images/previews/preview_budget.png",
+    "Python Data Analysis Script":"/images/previews/preview_code_dash.png",
+    "Company Newsletter":         "/images/previews/preview_saas.png",
+    "Social Media Calendar":      "/images/previews/preview_brand.png",
 };
 
 // Sample data for templates
