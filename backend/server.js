@@ -1,5 +1,3 @@
-const cors = require("cors");
-
 const express = require('express');
 const dotenv = require('dotenv');
 const cors = require('cors');
@@ -13,41 +11,66 @@ dotenv.config();
 connectDB();
 
 const app = express();
+
+// ─── CORS ───────────────────────────────────────────────────────────────────
+// Allow Netlify frontend + local development
+const allowedOrigins = [
+    'http://localhost:5000',
+    'http://localhost:3000',
+    'http://127.0.0.1:5000',
+];
+
+// Add any FRONTEND_URL set in environment (your Netlify URL)
+if (process.env.FRONTEND_URL) {
+    allowedOrigins.push(process.env.FRONTEND_URL);
+}
+
 app.use(cors({
-  origin: "*",
-  methods: ["GET", "POST", "PUT", "DELETE"],
-  credentials: true
+    origin: function (origin, callback) {
+        // Allow requests with no origin (mobile apps, curl, Postman)
+        if (!origin) return callback(null, true);
+        // Allow any netlify.app subdomain
+        if (origin.endsWith('.netlify.app') || allowedOrigins.includes(origin)) {
+            return callback(null, true);
+        }
+        callback(new Error(`CORS: origin ${origin} not allowed`));
+    },
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
+    credentials: true,
 }));
 
-// Middleware
-app.use(cors());
+// ─── Middleware ──────────────────────────────────────────────────────────────
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Static folder for uploads
+// ─── Static uploads (local dev only — on Render use Cloudinary) ─────────────
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
-// Mount API routers FIRST (before static)
-app.use('/api/auth', require('./routes/authRoutes'));
+// ─── API Routes ──────────────────────────────────────────────────────────────
+app.use('/api/auth',      require('./routes/authRoutes'));
 app.use('/api/templates', require('./routes/templateRoutes'));
 
-// Root API status
+// Health check — useful for Render uptime monitoring
 app.get('/api', (req, res) => {
-    res.json({ message: 'Template Sharing Platform API is running...' });
+    res.json({
+        status:  'ok',
+        message: 'TemplateHub API is running',
+        env:     process.env.NODE_ENV || 'development',
+    });
 });
 
-// Serve frontend static files for all non-API routes
-app.use(express.static(path.join(__dirname, '../frontend')));
-
-// Global error handler
+// ─── Global Error Handler ────────────────────────────────────────────────────
 app.use((err, req, res, next) => {
-    console.error(err.message);
+    console.error('Server Error:', err.message);
     const status = res.statusCode && res.statusCode !== 200 ? res.statusCode : 500;
     res.status(status).json({ message: err.message });
 });
 
+// ─── Start Server ────────────────────────────────────────────────────────────
 const PORT = process.env.PORT || 5000;
-
 app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`);
+    console.log(`\n🚀 Server running on port ${PORT}`);
+    console.log(`🔌 API at http://localhost:${PORT}/api`);
+    console.log(`🌍 CORS allowed origins: ${allowedOrigins.join(', ')} + *.netlify.app\n`);
 });

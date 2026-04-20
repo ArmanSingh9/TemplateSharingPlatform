@@ -2,6 +2,8 @@ const Template = require('../models/Template');
 const Rating = require('../models/Rating');
 const fs = require('fs');
 const path = require('path');
+const { getImageUrl } = require('../middleware/uploadMiddleware');
+
 
 // @desc    Get all templates (with search & filtering)
 // @route   GET /api/templates
@@ -70,7 +72,7 @@ const uploadTemplate = async (req, res) => {
             subject: subject || '',
             fileUrl: `/uploads/${templateFile.filename}`,
             originalFileName: templateFile.originalname,
-            previewImage: imageFile ? `/uploads/${imageFile.filename}` : undefined,
+            previewImage: imageFile ? getImageUrl(imageFile) : undefined,
             uploadedBy: req.user._id,
         });
 

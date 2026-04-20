@@ -10,7 +10,7 @@ const {
     getMyTemplates
 } = require('../controllers/templateController');
 const { protect } = require('../middleware/authMiddleware');
-const upload = require('../middleware/uploadMiddleware');
+const { upload } = require('../middleware/uploadMiddleware');
 
 router.route('/')
     .get(getTemplates)
