@@ -24,6 +24,15 @@ const api = {
         return this.handleResponse(res);
     },
 
+    async googleLogin(credential) {
+        const res = await fetch(`${API_URL}/auth/google`, {
+            method: 'POST',
+            headers: this.getHeaders(),
+            body: JSON.stringify({ credential })
+        });
+        return this.handleResponse(res);
+    },
+
     async register(name, email, password) {
         const res = await fetch(`${API_URL}/auth/register`, {
             method: 'POST',

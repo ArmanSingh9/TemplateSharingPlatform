@@ -76,4 +76,27 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
+
+    // GOOGLE OAUTH CALLBACK
+    window.handleGoogleLogin = async (response) => {
+        try {
+            // The response object contains the JWT credential from Google
+            const data = await api.googleLogin(response.credential);
+
+            // Store token + full user object
+            localStorage.setItem('token', data.token);
+            localStorage.setItem('user', JSON.stringify({
+                _id: data._id,
+                name: data.name,
+                email: data.email,
+                role: data.role
+            }));
+
+            window.showToast(`Welcome back, ${data.name}! 👋`, 'success');
+            setTimeout(() => window.location.href = '/index.html', 900);
+
+        } catch (err) {
+            window.showToast(err.message || 'Google authentication failed', 'error');
+        }
+    };
 });

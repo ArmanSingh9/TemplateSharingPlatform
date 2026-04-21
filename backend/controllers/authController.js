@@ -152,11 +152,60 @@ const resetPassword = async (req, res) => {
     }
 };
 
-// @desc    Google Sign In Stub
+// @desc    Google Sign In
 // @route   POST /api/auth/google
 const googleSignIn = async (req, res) => {
-    // This is a stub. Real implementation requires OAuth verification.
-    res.status(200).json({ message: 'Google Sign In endpoint ready for API Keys.' });
+    try {
+        const { credential } = req.body;
+        
+        if (!credential) {
+            return res.status(400).json({ message: 'Missing Google credential' });
+        }
+
+        // Verify the token with Google
+        const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID || '4251349550-iqadjqu6oepbnlbu866gm1kpleu8glkb.apps.googleusercontent.com';
+        const { OAuth2Client } = require('google-auth-library');
+        const googleClient = new OAuth2Client(GOOGLE_CLIENT_ID);
+        
+        const ticket = await googleClient.verifyIdToken({
+            idToken: credential,
+            audience: GOOGLE_CLIENT_ID,
+        });
+
+        const payload = ticket.getPayload();
+        const { email, name } = payload;
+
+        // Check if user already exists
+        let user = await User.findOne({ email });
+
+        if (!user) {
+            // Register them automatically with a completely random password
+            const crypto = require('crypto');
+            const randomPassword = crypto.randomBytes(32).toString('hex');
+            
+            const salt = await bcrypt.genSalt(10);
+            const hashedPassword = await bcrypt.hash(randomPassword, salt);
+
+            user = await User.create({
+                name,
+                email,
+                password: hashedPassword,
+            });
+        }
+
+        // Return JWT
+        res.json({
+            _id: user.id,
+            name: user.name,
+            email: user.email,
+            role: user.role,
+            token: generateToken(user._id),
+        });
+
+    } catch (error) {
+        console.error('Google Sign-In Error:', error.message);
+        res.status(401).json({ message: 'Google authentication failed' });
+    }
 };
 
 // @desc    Apple Sign In Stub

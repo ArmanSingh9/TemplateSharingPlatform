@@ -6,7 +6,7 @@
     <title>Create Account | TemplateHub</title>
     <link rel="stylesheet" href="/css/style.css">
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
-</head>
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
 <body>
 <div class="auth-wrapper">
   <div style="width:100%; max-width:440px;">
@@ -19,10 +19,22 @@
       <h1>Create your account</h1>
       <p class="auth-sub">Join thousands of creators sharing templates</p>
 
-      <button class="social-btn btn-bouncy" onclick="alert('Connect your Google credentials to enable Google Sign-In')">
-        <img src="https://www.svgrepo.com/show/475656/google-color.svg" width="18" alt="Google">
-        Continue with Google
-      </button>
+      <div id="g_id_onload"
+           data-client_id="4251349550-iqadjqu6oepbnlbu866gm1kpleu8glkb.apps.googleusercontent.com"
+           data-context="signup"
+           data-ux_mode="popup"
+           data-callback="handleGoogleLogin"
+           data-auto_prompt="false">
+      </div>
+      <div class="g_id_signin"
+           data-type="standard"
+           data-shape="rectangular"
+           data-theme="outline"
+           data-text="signup_with"
+           data-size="large"
+           data-logo_alignment="center"
+           style="width:100%; display:flex; justify-content:center; margin-bottom:12px;">
+      </div>
       <button class="social-btn btn-bouncy" onclick="alert('Connect your Apple credentials to enable Apple Sign-In')" style="margin-bottom:0">
         <i class="ph-fill ph-apple-logo" style="font-size:1.1rem;"></i>
         Continue with Apple

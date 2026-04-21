@@ -6,7 +6,7 @@
     <title>Sign In | TemplateHub</title>
     <link rel="stylesheet" href="/css/style.css">
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
-</head>
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
 <body>
 <div class="auth-wrapper">
   <div style="width:100%; max-width:440px;">
@@ -22,10 +22,22 @@
       <p class="auth-sub">Sign in to your account to continue</p>
 
       <!-- Social Logins -->
-      <button class="social-btn btn-bouncy" id="googleSignInBtn">
-        <img src="https://www.svgrepo.com/show/475656/google-color.svg" width="18" alt="Google">
-        Continue with Google
-      </button>
+      <div id="g_id_onload"
+           data-client_id="4251349550-iqadjqu6oepbnlbu866gm1kpleu8glkb.apps.googleusercontent.com"
+           data-context="signin"
+           data-ux_mode="popup"
+           data-callback="handleGoogleLogin"
+           data-auto_prompt="false">
+      </div>
+      <div class="g_id_signin"
+           data-type="standard"
+           data-shape="rectangular"
+           data-theme="outline"
+           data-text="continue_with"
+           data-size="large"
+           data-logo_alignment="center"
+           style="width:100%; display:flex; justify-content:center; margin-bottom:12px;">
+      </div>
       <button class="social-btn btn-bouncy" id="appleSignInBtn" style="margin-bottom:0">
         <i class="ph-fill ph-apple-logo" style="font-size:1.1rem;"></i>
         Continue with Apple
@@ -79,7 +91,7 @@
       overlay.addEventListener('click', (e) => { if (e.target === overlay) overlay.remove(); });
   }
 
-  document.getElementById('googleSignInBtn').onclick = () => showOAuthInfo('Google');
+  // Delete the old Google stub since it's now handled by the real Google script.
   document.getElementById('appleSignInBtn').onclick = () => showOAuthInfo('Apple');
 </script>
 </body>
