@@ -73,66 +73,38 @@ const fileFilter = function (req, file, cb) {
 };
 
 // ─────────────────────────────────────────────────────
-//  SMART STORAGE — picks Cloudinary for images, disk for files
+//  SMART STORAGE — routes 'image' to Cloudinary, 'file' to disk
 // ─────────────────────────────────────────────────────
-const smartStorage = multer.diskStorage({
-    destination: function (req, file, cb) {
-        cb(null, uploadDir);
-    },
-    filename: function (req, file, cb) {
-        const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
-        cb(null, uniqueSuffix + path.extname(file.originalname));
+function SmartStorage(cloud, disk) {
+    this.cloud = cloud;
+    this.disk = disk;
+}
+
+SmartStorage.prototype._handleFile = function _handleFile(req, file, cb) {
+    if (file.fieldname === 'image' && this.cloud) {
+        this.cloud._handleFile(req, file, cb);
+    } else {
+        this.disk._handleFile(req, file, cb);
     }
+};
+
+SmartStorage.prototype._removeFile = function _removeFile(req, file, cb) {
+    if (file.fieldname === 'image' && this.cloud) {
+        this.cloud._removeFile(req, file, cb);
+    } else {
+        this.disk._removeFile(req, file, cb);
+    }
+};
+
+const mixedStorage = useCloudinary 
+    ? new SmartStorage(cloudinaryImageStorage, diskStorage) 
+    : diskStorage;
+
+const upload = multer({
+    storage: mixedStorage,
+    limits: { fileSize: 50 * 1024 * 1024 },
+    fileFilter,
 });
-
-// Combined uploader: image field uses Cloudinary (if available), file field uses disk
-const upload = useCloudinary
-    ? {
-        fields: (fields) => {
-            // For requests with both file + image fields
-            const imageField = fields.find(f => f.name === 'image');
-            const fileField  = fields.find(f => f.name === 'file');
-
-            const cloudUpload = multer({
-                storage: cloudinaryImageStorage,
-                limits: { fileSize: 10 * 1024 * 1024 },
-            });
-
-            const diskUpload = multer({
-                storage: diskStorage,
-                limits: { fileSize: 50 * 1024 * 1024 },
-                fileFilter,
-            });
-
-            return (req, res, next) => {
-                // Upload image to Cloudinary first
-                cloudUpload.single('image')(req, res, (err) => {
-                    if (err) {
-                        // Non-fatal: fall through
-                    }
-                    const cloudFile = req.file;
-
-                    // Upload template file to disk
-                    diskUpload.fields([{ name: 'file', maxCount: 1 }])(req, res, (err2) => {
-                        if (err2) return next(err2);
-                        // Re-attach cloudinary image under req.files.image
-                        if (cloudFile) {
-                            if (!req.files) req.files = {};
-                            req.files['image'] = [cloudFile];
-                        }
-                        next();
-                    });
-                });
-            };
-        },
-        // Convenience: single file upload (disk)
-        single: (fieldName) => multer({ storage: diskStorage, limits: { fileSize: 50 * 1024 * 1024 }, fileFilter }).single(fieldName),
-    }
-    : multer({
-        storage: diskStorage,
-        limits: { fileSize: 50 * 1024 * 1024 },
-        fileFilter,
-    });
 
 // ─────────────────────────────────────────────────────
 //  HELPER: Get public URL for an uploaded image
