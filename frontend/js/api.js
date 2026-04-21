@@ -1,4 +1,4 @@
-const API_URL = 'https://templatehub-backend-19yp.onrender.com/api';
+const API_URL = 'https://templatehub-backend-l9yp.onrender.com/api';
 
 const api = {
     getHeaders(isFormData = false) {
