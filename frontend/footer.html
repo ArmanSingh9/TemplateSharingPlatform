@@ -14,11 +14,11 @@
         <div class="footer-stat-label">Templates Available</div>
       </div>
       <div>
-        <div class="footer-stat-num">50K+</div>
-        <div class="footer-stat-label">Downloads This Month</div>
+        <div class="footer-stat-num" id="stat-downloads">50K+</div>
+        <div class="footer-stat-label">Total Downloads</div>
       </div>
       <div>
-        <div class="footer-stat-num">12K+</div>
+        <div class="footer-stat-num" id="stat-creators">12K+</div>
         <div class="footer-stat-label">Active Creators</div>
       </div>
       <div>
@@ -155,4 +155,37 @@
       if (e.key === 'Enter') subscribeNewsletter();
     });
   }
+
+  // Fetch live stats
+  async function fetchFooterStats() {
+    try {
+      // Use known backend URL since frontend is on Vercel and backend is on Render
+      const apiUrl = 'https://templatehub-backend-l9yp.onrender.com/api';
+      const res = await fetch(`${apiUrl}/templates/stats`);
+      
+      if (!res.ok) throw new Error('Failed to fetch stats');
+      
+      const stats = await res.json();
+
+      const formatNumber = (num) => {
+        if (num === 0) return '0';
+        if (num >= 1000000) return (num / 1000000).toFixed(1).replace(/\.0$/, '') + 'M+';
+        if (num >= 1000) return (num / 1000).toFixed(1).replace(/\.0$/, '') + 'K+';
+        return num + '+';
+      };
+
+      const tmplEl = document.getElementById('stat-templates');
+      const downEl = document.getElementById('stat-downloads');
+      const creatEl = document.getElementById('stat-creators');
+
+      // We only update if we got valid numbers
+      if (tmplEl && typeof stats.templates === 'number') tmplEl.textContent = formatNumber(stats.templates);
+      if (downEl && typeof stats.downloads === 'number') downEl.textContent = formatNumber(stats.downloads);
+      if (creatEl && typeof stats.creators === 'number') creatEl.textContent = formatNumber(stats.creators);
+    } catch (err) {
+      console.warn('Could not load footer stats:', err);
+      // Fails silently, leaving the default static numbers visible
+    }
+  }
+  fetchFooterStats();
 </script>
