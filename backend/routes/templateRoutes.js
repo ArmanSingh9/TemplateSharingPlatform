@@ -7,7 +7,8 @@ const {
     downloadTemplate,
     rateTemplate,
     deleteTemplate,
-    getMyTemplates
+    getMyTemplates,
+    getPlatformStats
 } = require('../controllers/templateController');
 const { protect } = require('../middleware/authMiddleware');
 const { upload } = require('../middleware/uploadMiddleware');
@@ -17,6 +18,7 @@ router.route('/')
     .post(protect, upload.fields([{ name: 'file', maxCount: 1 }, { name: 'image', maxCount: 1 }]), uploadTemplate);
 
 router.get('/my/templates', protect, getMyTemplates);
+router.get('/stats', getPlatformStats);
 
 router.route('/:id')
     .get(getTemplateById)

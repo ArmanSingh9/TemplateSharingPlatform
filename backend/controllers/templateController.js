@@ -191,6 +191,29 @@ const getMyTemplates = async (req, res) => {
     }
 };
 
+// @desc    Get platform statistics
+// @route   GET /api/templates/stats
+const getPlatformStats = async (req, res) => {
+    try {
+        const templatesCount = await Template.countDocuments();
+        
+        const downloadsResult = await Template.aggregate([
+            { $group: { _id: null, total: { $sum: "$downloads" } } }
+        ]);
+        const downloadsCount = downloadsResult.length > 0 ? downloadsResult[0].total : 0;
+        
+        const activeCreatorsCount = (await Template.distinct('uploadedBy')).length;
+
+        res.json({
+            templates: templatesCount,
+            downloads: downloadsCount,
+            creators: activeCreatorsCount
+        });
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+};
+
 module.exports = {
     getTemplates,
     getTemplateById,
@@ -198,5 +221,6 @@ module.exports = {
     downloadTemplate,
     rateTemplate,
     deleteTemplate,
-    getMyTemplates
+    getMyTemplates,
+    getPlatformStats
 };
